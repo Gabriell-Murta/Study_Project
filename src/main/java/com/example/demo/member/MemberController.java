@@ -1,5 +1,7 @@
 package com.example.demo.member;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,9 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path="api/v1/member")
 public class MemberController {
-    @GetMapping
-    public String getMember(){
-        return new Member("Gabriell").toString();
+
+  private final MemberService memberService;
+
+  @Autowired
+  public MemberController(MemberService memberService) {
+    this.memberService = memberService;
+  }
+
+  @GetMapping
+    public List<Member> getMember(){
+        return memberService.getMember();
   }
 
 }

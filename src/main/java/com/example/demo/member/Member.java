@@ -1,10 +1,30 @@
 package com.example.demo.member;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Member {
-    private String name;
-    private String document;
-    private String documentType;
-    private String businessSegment;
+  @Id
+  @SequenceGenerator(
+      name = "member_sequence",
+      sequenceName = "member_sequence",
+      allocationSize = 1
+  )
+  @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "member_sequence"
+  )
+  private Long id;
+  private String name;
+  private String document;
+  private String documentType;
+  private String businessSegment;
 
   public Member() {
   }
@@ -18,6 +38,14 @@ public class Member {
     this.document = document;
     this.documentType = documentType;
     this.businessSegment = businessSegment;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -55,7 +83,8 @@ public class Member {
   @Override
   public String toString() {
     return "Member{" +
-        "name='" + name + '\'' +
+        "id=" + id +
+        ", name='" + name + '\'' +
         ", document='" + document + '\'' +
         ", documentType='" + documentType + '\'' +
         ", businessSegment='" + businessSegment + '\'' +
