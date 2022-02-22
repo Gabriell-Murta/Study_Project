@@ -3,6 +3,8 @@ package com.example.demo.member;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +20,13 @@ public class MemberController {
   }
 
   @GetMapping
-    public List<Member> getMember(){
-        return memberService.getMember();
+  public List<Member> getMember(){
+    return memberService.getMember();
+  }
+
+  @PutMapping("/{memberId}/product/{productId}")
+  Member assignMemberToProduct(@PathVariable Long memberId, @PathVariable Long productId){
+    return memberService.assignMemberToProduct(memberId,productId);
   }
 
 }

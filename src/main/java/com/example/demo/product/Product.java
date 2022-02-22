@@ -1,13 +1,38 @@
 package com.example.demo.product;
 
 import com.example.demo.member.Member;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Product {
 
+  @Id
+  @SequenceGenerator(
+      name = "product_sequence",
+      sequenceName = "product_sequence",
+      allocationSize = 1
+  )
+  @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "product_sequence"
+  )
+  private Long id;
   private String name;
-  private List<Member> members;
   private String businessSegment;
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "product")
+  private Set<Member> members = new HashSet();
 
   public Product() {
   }
@@ -17,10 +42,12 @@ public class Product {
     this.businessSegment = businessSegment;
   }
 
-  public Product(String name, List<Member> members, String businessSegment) {
-    this.name = name;
-    this.members = members;
-    this.businessSegment = businessSegment;
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -31,14 +58,6 @@ public class Product {
     this.name = name;
   }
 
-  public List<Member> getMembers() {
-    return members;
-  }
-
-  public void setMembers(List<Member> members) {
-    this.members = members;
-  }
-
   public String getBusinessSegment() {
     return businessSegment;
   }
@@ -47,13 +66,12 @@ public class Product {
     this.businessSegment = businessSegment;
   }
 
-  @Override
-  public String toString() {
-    return "Product{" +
-        "name='" + name + '\'' +
-        ", members=" + members +
-        ", businessSegment='" + businessSegment + '\'' +
-        '}';
+  public Set<Member> getMembers() {
+    return members;
+  }
+
+  public void setMembers(Set<Member> members) {
+    this.members = members;
   }
 }
 

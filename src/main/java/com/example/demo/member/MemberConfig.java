@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 public class MemberConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(MemberRepository repository){
+    CommandLineRunner members(MemberRepository repository){
       return args -> {
-        Member gabriell = new Member("Gabriell");
+        Member gabriell = new Member("John");
         Member alex = new Member("Alex");
         repository.saveAll(List.of(gabriell,alex));
       };

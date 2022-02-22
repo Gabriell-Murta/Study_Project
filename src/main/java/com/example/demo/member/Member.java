@@ -1,15 +1,20 @@
 package com.example.demo.member;
 
+import com.example.demo.product.Product;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Member {
+
   @Id
   @SequenceGenerator(
       name = "member_sequence",
@@ -26,18 +31,15 @@ public class Member {
   private String documentType;
   private String businessSegment;
 
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "product_id", referencedColumnName = "id")
+  private Product product;
+
   public Member() {
   }
 
   public Member(String name) {
     this.name = name;
-  }
-
-  public Member(String name, String document, String documentType, String businessSegment) {
-    this.name = name;
-    this.document = document;
-    this.documentType = documentType;
-    this.businessSegment = businessSegment;
   }
 
   public Long getId() {
@@ -80,14 +82,15 @@ public class Member {
     this.businessSegment = businessSegment;
   }
 
-  @Override
-  public String toString() {
-    return "Member{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", document='" + document + '\'' +
-        ", documentType='" + documentType + '\'' +
-        ", businessSegment='" + businessSegment + '\'' +
-        '}';
+  public Product getProduct() {
+    return product;
+  }
+
+  public void setProduct(Product product) {
+    this.product = product;
+  }
+
+  public void assignProduct(Product product) {
+    this.product = product;
   }
 }
