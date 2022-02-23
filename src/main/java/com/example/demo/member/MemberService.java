@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
   private final MemberRepository memberRepository;
-
   private final ProductRepository productRepository;
 
   @Autowired

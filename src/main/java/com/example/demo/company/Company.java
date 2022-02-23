@@ -1,25 +1,43 @@
 package com.example.demo.company;
 
 import com.example.demo.product.Product;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Company {
+
+    @Id
+    @SequenceGenerator(
+        name = "company_sequence",
+        sequenceName = "company_sequence",
+        allocationSize = 1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "company_sequence"
+    )
     private Long id;
     private String name;
-    private List<Product> products;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private Set<Product> products = new HashSet();
 
   public Company() {
   }
 
-  public Company(Long id, String name) {
-    this.id = id;
+  public Company(String name) {
     this.name = name;
-  }
-
-  public Company(Long id, String name, List<Product> products) {
-    this.id = id;
-    this.name = name;
-    this.products = products;
   }
 
   public Long getId() {
@@ -38,20 +56,11 @@ public class Company {
     this.name = name;
   }
 
-  public List<Product> getProducts() {
+  public Set<Product> getProducts() {
     return products;
   }
 
-  public void setProducts(List<Product> products) {
+  public void setProducts(Set<Product> products) {
     this.products = products;
-  }
-
-  @Override
-  public String toString() {
-    return "Company{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", products=" + products +
-        '}';
   }
 }

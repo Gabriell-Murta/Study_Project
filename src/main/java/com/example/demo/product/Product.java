@@ -1,13 +1,17 @@
 package com.example.demo.product;
 
+import com.example.demo.company.Company;
 import com.example.demo.member.Member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,6 +37,10 @@ public class Product {
   @JsonIgnore
   @OneToMany(mappedBy = "product")
   private Set<Member> members = new HashSet();
+
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "company_id", referencedColumnName = "id")
+  private Company company;
 
   public Product() {
   }
@@ -72,6 +80,18 @@ public class Product {
 
   public void setMembers(Set<Member> members) {
     this.members = members;
+  }
+
+  public Company getCompany() {
+    return company;
+  }
+
+  public void setCompany(Company company) {
+    this.company = company;
+  }
+
+  public void assignCompany(Company company) {
+    this.company = company;
   }
 }
 
