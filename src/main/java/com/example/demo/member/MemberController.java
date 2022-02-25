@@ -1,10 +1,13 @@
 package com.example.demo.member;
 
+import com.example.demo.company.Company;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +27,24 @@ public class MemberController {
     return memberService.getMember();
   }
 
-  @PutMapping("/{memberId}/product/{productId}")
+  @PostMapping("/{memberId}/product/{productId}")
   Member assignMemberToProduct(@PathVariable Long memberId, @PathVariable Long productId){
     return memberService.assignMemberToProduct(memberId,productId);
+  }
+
+  @PostMapping("/create")
+  Member createMember(@RequestBody Member member){
+    return memberService.createMember(member);
+  }
+
+  @DeleteMapping("/delete/{id}")
+  void deleteMember(@PathVariable Long id) {
+    memberService.deleteMember(id);
+  }
+
+  @PostMapping("/update/{id}")
+  Member updateMember(@PathVariable Long id, @RequestBody Member member){
+    return memberService.updateMember(id, member);
   }
 
 }

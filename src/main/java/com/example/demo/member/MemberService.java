@@ -29,4 +29,27 @@ public class MemberService {
     member.assignProduct(product);
     return memberRepository.save(member);
   }
+
+  public Member createMember(Member member) {
+    return memberRepository.save(member);
+  }
+
+  public void deleteMember(Long id) {
+    memberRepository.deleteById(id);
+  }
+
+  public Member updateMember(Long id, Member memberUpdate) {
+    Member member = memberRepository.findById(id).get();
+
+    if(memberUpdate.getName() != null && !memberUpdate.getName().isEmpty()){
+      member.setName(memberUpdate.getName());
+    }
+
+    if(memberUpdate.getBusinessSegment() != null && !memberUpdate.getBusinessSegment().isEmpty()){
+      member.setBusinessSegment(memberUpdate.getBusinessSegment());
+    }
+
+    memberRepository.save(member);
+    return member;
+  }
 }

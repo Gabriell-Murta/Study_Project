@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table
@@ -32,6 +34,7 @@ public class Member {
   private String businessSegment;
 
   @ManyToOne(cascade = CascadeType.ALL)
+  @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "product_id", referencedColumnName = "id")
   private Product product;
 

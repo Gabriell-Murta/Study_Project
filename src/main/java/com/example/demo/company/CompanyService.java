@@ -18,8 +18,22 @@ public class CompanyService {
     return companyRepository.findAll();
   }
 
-  public Company createCompany(String name) {
-    Company test = new Company(name);
-    return companyRepository.save(test);
+  public Company createCompany(Company company) {
+    return companyRepository.save(company);
+  }
+
+  public void deleteCompany(Long id) {
+    companyRepository.deleteById(id);
+  }
+
+  public Company updateCompany(Long id, Company companyUpdate) {
+    Company company = companyRepository.findById(id).get();
+
+    if(companyUpdate.getName() != null && !companyUpdate.getName().isEmpty()){
+      company.setName(companyUpdate.getName());
+    }
+
+    companyRepository.save(company);
+    return company;
   }
 }

@@ -2,6 +2,7 @@ package com.example.demo.company;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,19 @@ public class CompanyController {
       return companyService.getCompany();
   }
 
-  @PostMapping("/{name}")
-  Company createCompany(@PathVariable String name){
-    return companyService.createCompany(name);
+  @PostMapping("/create")
+  Company createCompany(@RequestBody Company company){
+    return companyService.createCompany(company);
   }
+
+  @DeleteMapping("/delete/{id}")
+  void deleteCompany(@PathVariable Long id){
+    companyService.deleteCompany(id);
+  }
+
+  @PostMapping("/update/{id}")
+  Company updateCompany(@PathVariable Long id, @RequestBody Company company){
+    return companyService.updateCompany(id, company);
+  }
+
 }

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table
@@ -39,6 +41,7 @@ public class Product {
   private Set<Member> members = new HashSet();
 
   @ManyToOne(cascade = CascadeType.ALL)
+  @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "company_id", referencedColumnName = "id")
   private Company company;
 
