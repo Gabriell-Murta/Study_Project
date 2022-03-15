@@ -3,7 +3,9 @@ package com.example.data.member;
 import com.example.core.member.gateway.MemberGateway;
 import com.example.core.member.member.Member;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class MemberGatewayImpl implements MemberGateway {
 
   private final MemberRepository memberRepository;

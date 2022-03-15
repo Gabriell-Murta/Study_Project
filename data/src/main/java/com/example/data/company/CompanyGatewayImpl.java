@@ -3,8 +3,9 @@ package com.example.data.company;
 import com.example.core.company.company.Company;
 import com.example.core.company.gateway.CompanyGateway;
 import java.util.List;
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class CompanyGatewayImpl implements CompanyGateway {
 
   private final CompanyRepository companyRepository;

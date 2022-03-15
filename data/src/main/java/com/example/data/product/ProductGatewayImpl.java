@@ -3,7 +3,9 @@ package com.example.data.product;
 import com.example.core.product.gateway.ProductGateway;
 import com.example.core.product.product.Product;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class ProductGatewayImpl implements ProductGateway {
 
   private final ProductRepository productRepository;
