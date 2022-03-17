@@ -1,7 +1,11 @@
 package com.example.api.product;
 
 import com.example.core.product.product.Product;
-import com.example.core.product.usecase.ProductService;
+import com.example.core.product.usecase.AssignProductToCompanyUseCase;
+import com.example.core.product.usecase.CreateProductUseCase;
+import com.example.core.product.usecase.DeleteProductUseCase;
+import com.example.core.product.usecase.ListProductsUseCase;
+import com.example.core.product.usecase.UpdateProductUseCase;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,36 +20,48 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/v2/product")
 public class ProductController {
 
-  private final ProductService productService;
+  private final AssignProductToCompanyUseCase assignProductToCompany;
+  private final CreateProductUseCase createProduct;
+  private final DeleteProductUseCase deleteProduct;
+  private final ListProductsUseCase listProductsUseCase;
+  private final UpdateProductUseCase updateProduct;
 
   @Autowired
-  public ProductController(ProductService productService) {
-    this.productService = productService;
+  public ProductController(AssignProductToCompanyUseCase assignProductToCompany,
+      CreateProductUseCase createProduct,
+      DeleteProductUseCase deleteProduct,
+      ListProductsUseCase listProductsUseCase,
+      UpdateProductUseCase updateProduct) {
+    this.assignProductToCompany = assignProductToCompany;
+    this.createProduct = createProduct;
+    this.deleteProduct = deleteProduct;
+    this.listProductsUseCase = listProductsUseCase;
+    this.updateProduct = updateProduct;
   }
 
   @GetMapping
   public List<Product> getProduct(){
-    return productService.getProduct();
+    return listProductsUseCase.execute();
   }
 
   @PostMapping("/{productId}/company/{companyId}")
   Product assignProductToCompany(@PathVariable Long productId, @PathVariable Long companyId){
-    return productService.assignProductToCompany(productId,companyId);
+    return assignProductToCompany.execute(productId,companyId);
   }
 
   @PostMapping("/create")
   Product createProduct(@RequestBody Product product){
-    return productService.createProduct(product);
+    return createProduct.execute(product);
   }
 
   @DeleteMapping("/delete/{id}")
   void deleteProduct(@PathVariable Long id) {
-    productService.deleteProduct(id);
+    deleteProduct.execute(id);
   }
 
   @PostMapping("/update/{id}")
   Product updateProduct(@PathVariable Long id, @RequestBody Product product){
-    return productService.updateProduct(id, product);
+    return updateProduct.execute(id, product);
   }
 
 }

@@ -1,9 +1,12 @@
 package com.example.api.member;
 
 import com.example.core.member.member.Member;
-import com.example.core.member.usecase.MemberService;
+import com.example.core.member.usecase.AssignMemberToProductUseCase;
+import com.example.core.member.usecase.CreateMemberUseCase;
+import com.example.core.member.usecase.DeleteMemberUseCase;
+import com.example.core.member.usecase.ListMembersUseCase;
+import com.example.core.member.usecase.UpdateMemberUseCase;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,36 +19,48 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path="api/v2/member")
 public class MemberController {
 
-  private final MemberService memberService;
+  private final AssignMemberToProductUseCase assignMemberToProductUseCase;
+  private final CreateMemberUseCase createMemberUseCase;
+  private final DeleteMemberUseCase deleteMemberUseCase;
+  private final ListMembersUseCase listMembersUseCase;
+  private final UpdateMemberUseCase updateMemberUseCase;
 
-  @Autowired
-  public MemberController(MemberService memberService) {
-    this.memberService = memberService;
+  public MemberController(
+      AssignMemberToProductUseCase assignMemberToProductUseCase,
+      CreateMemberUseCase createMemberUseCase,
+      DeleteMemberUseCase deleteMemberUseCase,
+      ListMembersUseCase listMembersUseCase,
+      UpdateMemberUseCase updateMemberUseCase) {
+    this.assignMemberToProductUseCase = assignMemberToProductUseCase;
+    this.createMemberUseCase = createMemberUseCase;
+    this.deleteMemberUseCase = deleteMemberUseCase;
+    this.listMembersUseCase = listMembersUseCase;
+    this.updateMemberUseCase = updateMemberUseCase;
   }
 
   @GetMapping
   public List<Member> getMember(){
-    return memberService.getMember();
+    return listMembersUseCase.execute();
   }
 
   @PostMapping("/{memberId}/product/{productId}")
   Member assignMemberToProduct(@PathVariable Long memberId, @PathVariable Long productId){
-    return memberService.assignMemberToProduct(memberId,productId);
+    return assignMemberToProductUseCase.execute(memberId,productId);
   }
 
   @PostMapping("/create")
   Member createMember(@RequestBody Member member){
-    return memberService.createMember(member);
+    return createMemberUseCase.execute(member);
   }
 
   @DeleteMapping("/delete/{id}")
   void deleteMember(@PathVariable Long id) {
-    memberService.deleteMember(id);
+    deleteMemberUseCase.execute(id);
   }
 
   @PostMapping("/update/{id}")
   Member updateMember(@PathVariable Long id, @RequestBody Member member){
-    return memberService.updateMember(id, member);
+    return updateMemberUseCase.execute(id, member);
   }
 
 }
