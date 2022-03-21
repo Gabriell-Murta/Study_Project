@@ -10,9 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+@AllArgsConstructor
+@Data
 @Entity
 @Table
 public class Member {
@@ -37,63 +41,4 @@ public class Member {
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "product_id", referencedColumnName = "id")
   private Product product;
-
-  public Member() {
-  }
-
-  public Member(String name) {
-    this.name = name;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDocument() {
-    return document;
-  }
-
-  public void setDocument(String document) {
-    this.document = document;
-  }
-
-  public String getDocumentType() {
-    return documentType;
-  }
-
-  public void setDocumentType(String documentType) {
-    this.documentType = documentType;
-  }
-
-  public String getBusinessSegment() {
-    return businessSegment;
-  }
-
-  public void setBusinessSegment(String businessSegment) {
-    this.businessSegment = businessSegment;
-  }
-
-  public Product getProduct() {
-    return product;
-  }
-
-  public void setProduct(Product product) {
-    this.product = product;
-  }
-
-  public void assignProduct(Product product) {
-    this.product = product;
-  }
 }

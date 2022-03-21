@@ -3,18 +3,15 @@ package com.example.data.product;
 import com.example.core.product.gateway.ProductGateway;
 import com.example.core.product.product.Product;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+@AllArgsConstructor
 @Component
 public class ProductGatewayImpl implements ProductGateway {
 
   private final ProductRepository productRepository;
-
-  public ProductGatewayImpl(ProductRepository productRepository) {
-    this.productRepository = productRepository;
-  }
-
 
   @Override
   @Transactional

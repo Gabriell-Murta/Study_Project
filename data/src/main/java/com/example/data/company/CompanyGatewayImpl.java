@@ -3,17 +3,15 @@ package com.example.data.company;
 import com.example.core.company.company.Company;
 import com.example.core.company.gateway.CompanyGateway;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+@AllArgsConstructor
 @Component
 public class CompanyGatewayImpl implements CompanyGateway {
 
   private final CompanyRepository companyRepository;
-
-  public CompanyGatewayImpl(CompanyRepository companyRepository) {
-    this.companyRepository = companyRepository;
-  }
 
   @Override
   @Transactional

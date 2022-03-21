@@ -3,17 +3,15 @@ package com.example.data.member;
 import com.example.core.member.gateway.MemberGateway;
 import com.example.core.member.member.Member;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+@AllArgsConstructor
 @Component
 public class MemberGatewayImpl implements MemberGateway {
 
   private final MemberRepository memberRepository;
-
-  public MemberGatewayImpl(MemberRepository memberRepository) {
-    this.memberRepository = memberRepository;
-  }
 
   @Override
   @Transactional

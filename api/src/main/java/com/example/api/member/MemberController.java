@@ -7,6 +7,7 @@ import com.example.core.member.usecase.DeleteMemberUseCase;
 import com.example.core.member.usecase.ListMembersUseCase;
 import com.example.core.member.usecase.UpdateMemberUseCase;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@AllArgsConstructor
 @RestController
-@RequestMapping(path="api/v2/member")
+@RequestMapping(path = "api/v2/member")
 public class MemberController {
 
   private final AssignMemberToProductUseCase assignMemberToProductUseCase;
@@ -24,19 +26,6 @@ public class MemberController {
   private final DeleteMemberUseCase deleteMemberUseCase;
   private final ListMembersUseCase listMembersUseCase;
   private final UpdateMemberUseCase updateMemberUseCase;
-
-  public MemberController(
-      AssignMemberToProductUseCase assignMemberToProductUseCase,
-      CreateMemberUseCase createMemberUseCase,
-      DeleteMemberUseCase deleteMemberUseCase,
-      ListMembersUseCase listMembersUseCase,
-      UpdateMemberUseCase updateMemberUseCase) {
-    this.assignMemberToProductUseCase = assignMemberToProductUseCase;
-    this.createMemberUseCase = createMemberUseCase;
-    this.deleteMemberUseCase = deleteMemberUseCase;
-    this.listMembersUseCase = listMembersUseCase;
-    this.updateMemberUseCase = updateMemberUseCase;
-  }
 
   @GetMapping
   public List<Member> getMember(){

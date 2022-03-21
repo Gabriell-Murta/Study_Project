@@ -7,7 +7,7 @@ import com.example.core.product.usecase.DeleteProductUseCase;
 import com.example.core.product.usecase.ListProductsUseCase;
 import com.example.core.product.usecase.UpdateProductUseCase;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/v2/product")
 public class ProductController {
@@ -25,19 +26,6 @@ public class ProductController {
   private final DeleteProductUseCase deleteProduct;
   private final ListProductsUseCase listProductsUseCase;
   private final UpdateProductUseCase updateProduct;
-
-  @Autowired
-  public ProductController(AssignProductToCompanyUseCase assignProductToCompany,
-      CreateProductUseCase createProduct,
-      DeleteProductUseCase deleteProduct,
-      ListProductsUseCase listProductsUseCase,
-      UpdateProductUseCase updateProduct) {
-    this.assignProductToCompany = assignProductToCompany;
-    this.createProduct = createProduct;
-    this.deleteProduct = deleteProduct;
-    this.listProductsUseCase = listProductsUseCase;
-    this.updateProduct = updateProduct;
-  }
 
   @GetMapping
   public List<Product> getProduct(){

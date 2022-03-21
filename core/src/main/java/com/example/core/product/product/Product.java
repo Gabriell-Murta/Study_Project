@@ -15,9 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+@AllArgsConstructor
+@Data
 @Entity
 @Table
 public class Product {
@@ -45,55 +49,4 @@ public class Product {
   @JoinColumn(name = "company_id", referencedColumnName = "id")
   private Company company;
 
-  public Product() {
-  }
-
-  public Product(String name, String businessSegment) {
-    this.name = name;
-    this.businessSegment = businessSegment;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getBusinessSegment() {
-    return businessSegment;
-  }
-
-  public void setBusinessSegment(String businessSegment) {
-    this.businessSegment = businessSegment;
-  }
-
-  public Set<Member> getMembers() {
-    return members;
-  }
-
-  public void setMembers(Set<Member> members) {
-    this.members = members;
-  }
-
-  public Company getCompany() {
-    return company;
-  }
-
-  public void setCompany(Company company) {
-    this.company = company;
-  }
-
-  public void assignCompany(Company company) {
-    this.company = company;
-  }
 }
