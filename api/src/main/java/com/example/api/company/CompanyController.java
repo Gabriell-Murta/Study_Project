@@ -1,13 +1,11 @@
 package com.example.api.company;
 
-
 import com.example.core.company.company.Company;
 import com.example.core.company.usecase.CreateCompanyUseCase;
 import com.example.core.company.usecase.DeleteCompanyUseCase;
 import com.example.core.company.usecase.ListCompaniesUseCase;
 import com.example.core.company.usecase.UpdateCompanyUseCase;
-import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@AllArgsConstructor
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v2/company")
+@RequiredArgsConstructor
 public class CompanyController {
 
   private final ListCompaniesUseCase listCompaniesUseCase;

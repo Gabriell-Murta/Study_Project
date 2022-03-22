@@ -3,11 +3,11 @@ package com.example.core.company.usecase;
 import com.example.core.company.company.Company;
 import com.example.core.company.gateway.CompanyGateway;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ListCompaniesUseCase {
 
   private final CompanyGateway companyGateway;

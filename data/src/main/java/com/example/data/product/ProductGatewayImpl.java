@@ -2,13 +2,14 @@ package com.example.data.product;
 
 import com.example.core.product.gateway.ProductGateway;
 import com.example.core.product.product.Product;
-import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@AllArgsConstructor
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class ProductGatewayImpl implements ProductGateway {
 
   private final ProductRepository productRepository;

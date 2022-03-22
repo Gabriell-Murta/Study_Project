@@ -2,13 +2,14 @@ package com.example.data.member;
 
 import com.example.core.member.gateway.MemberGateway;
 import com.example.core.member.member.Member;
-import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@AllArgsConstructor
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class MemberGatewayImpl implements MemberGateway {
 
   private final MemberRepository memberRepository;

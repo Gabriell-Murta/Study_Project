@@ -6,8 +6,7 @@ import com.example.core.member.usecase.CreateMemberUseCase;
 import com.example.core.member.usecase.DeleteMemberUseCase;
 import com.example.core.member.usecase.ListMembersUseCase;
 import com.example.core.member.usecase.UpdateMemberUseCase;
-import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@AllArgsConstructor
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v2/member")
+@RequiredArgsConstructor
 public class MemberController {
 
   private final AssignMemberToProductUseCase assignMemberToProductUseCase;
