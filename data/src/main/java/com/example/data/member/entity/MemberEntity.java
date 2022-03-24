@@ -1,6 +1,6 @@
 package com.example.data.member.entity;
 
-import com.example.core.product.product.Product;
+import com.example.data.product.entity.ProductEntity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,5 +38,5 @@ public class MemberEntity {
   @ManyToOne(cascade = CascadeType.ALL)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "product_id", referencedColumnName = "id")
-  private Product product;
+  private ProductEntity product;
 }

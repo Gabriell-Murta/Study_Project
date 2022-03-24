@@ -5,6 +5,7 @@ import com.example.core.company.gateway.CompanyGateway;
 import com.example.data.company.entity.CompanyEntity;
 import com.example.data.company.mapper.CompanyEntityMapper;
 import java.util.Collections;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.jpa.repository.JpaContext;
@@ -25,8 +26,7 @@ public class CompanyGatewayImpl implements CompanyGateway {
   @Transactional
   public List<Company> findCompany() {
     final List<CompanyEntity> companyEntities = companyRepository.findAll();
-    //return  companyEntities.stream().map(Company -> companyEntityMapper.fromEntity(Company, jpaContext)).collect(Collectors.toList());
-    return Collections.emptyList();
+    return  companyEntities.stream().map(Company -> companyEntityMapper.fromEntity(Company, jpaContext)).collect(Collectors.toList());
   }
 
   @Override
@@ -48,11 +48,7 @@ public class CompanyGatewayImpl implements CompanyGateway {
   @Transactional
   public Company findCompanyById(Long id) {
 
-    if (companyRepository.existsById(id)){
-
-      final CompanyEntity companyEntity = companyRepository.findById(id).get();
-      return companyEntityMapper.fromEntity(companyEntity, jpaContext);
-    }
-    return null;
+    final CompanyEntity companyEntity = companyRepository.findById(id).get();
+    return companyEntityMapper.fromEntity(companyEntity, jpaContext);
   }
 }

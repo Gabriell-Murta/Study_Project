@@ -1,7 +1,7 @@
 package com.example.data.product.entity;
 
-import com.example.core.company.company.Company;
-import com.example.core.member.member.Member;
+import com.example.data.company.entity.CompanyEntity;
+import com.example.data.member.entity.MemberEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,11 +41,11 @@ public class ProductEntity {
 
   @JsonIgnore
   @OneToMany(mappedBy = "product")
-  private Set<Member> members = new HashSet();
+  private Set<MemberEntity> members = new HashSet();
 
   @ManyToOne(cascade = CascadeType.ALL)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "company_id", referencedColumnName = "id")
-  private Company company;
+  private CompanyEntity company;
 
 }

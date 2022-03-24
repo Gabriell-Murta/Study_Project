@@ -5,6 +5,7 @@ import com.example.core.product.product.Product;
 import com.example.data.product.entity.ProductEntity;
 import com.example.data.product.mapper.ProductEntityMapper;
 import java.util.Collections;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.jpa.repository.JpaContext;
@@ -26,8 +27,7 @@ public class ProductGatewayImpl implements ProductGateway {
   public List<Product> findProduct() {
 
     final List<ProductEntity> productEntities = productRepository.findAll();
-    //return productEntities.stream().map(Product -> productEntityMapper.fromEntity(Product, jpaContext)).collect(Collectors.toList());
-    return Collections.emptyList();
+    return productEntities.stream().map(Product -> productEntityMapper.fromEntity(Product, jpaContext)).collect(Collectors.toList());
   }
 
   @Override
@@ -49,10 +49,7 @@ public class ProductGatewayImpl implements ProductGateway {
   @Transactional
   public Product findProductById(Long id) {
 
-    if (productRepository.existsById(id)){
-      final ProductEntity productEntity = productRepository.findById(id).get();
-      return productEntityMapper.fromEntity(productEntity, jpaContext);
-    }
-    return null;
+    final ProductEntity productEntity = productRepository.findById(id).get();
+    return productEntityMapper.fromEntity(productEntity, jpaContext);
   }
 }

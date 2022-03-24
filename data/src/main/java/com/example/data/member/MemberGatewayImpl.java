@@ -4,7 +4,7 @@ import com.example.core.member.gateway.MemberGateway;
 import com.example.core.member.member.Member;
 import com.example.data.member.entity.MemberEntity;
 import com.example.data.member.mapper.MemberEntityMapper;
-import java.util.Collections;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.jpa.repository.JpaContext;
@@ -25,8 +25,7 @@ public class MemberGatewayImpl implements MemberGateway {
   @Transactional
   public List<Member> findMember() {
     final List<MemberEntity> memberEntities = memberRepository.findAll();
-    //return memberEntities.stream().map(Member -> memberEntityMapper.fromEntity(Member, jpaContext)).collect(Collectors.toList());
-    return Collections.emptyList();
+    return memberEntities.stream().map(Member -> memberEntityMapper.fromEntity(Member, jpaContext)).collect(Collectors.toList());
   }
 
   @Override
@@ -48,11 +47,7 @@ public class MemberGatewayImpl implements MemberGateway {
   @Transactional
   public Member findMemberById(Long id) {
 
-    if (memberRepository.existsById(id)){
-      final MemberEntity memberEntity = memberRepository.findById(id).get();
-      return memberEntityMapper.fromEntity(memberEntity, jpaContext);
-    }
-
-    return null;
+    final MemberEntity memberEntity = memberRepository.findById(id).get();
+    return memberEntityMapper.fromEntity(memberEntity, jpaContext);
   }
 }

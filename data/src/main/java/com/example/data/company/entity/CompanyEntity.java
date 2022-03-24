@@ -1,6 +1,6 @@
 package com.example.data.company.entity;
 
-import com.example.core.product.product.Product;
+import com.example.data.product.entity.ProductEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +32,6 @@ public class CompanyEntity {
 
   @JsonIgnore
   @OneToMany(mappedBy = "company")
-  private Set<Product> products = new HashSet();
+  private Set<ProductEntity> products = new HashSet();
 
 }
