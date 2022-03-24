@@ -17,7 +17,5 @@ artifacts {
 }
 
 dependencies {
-	//TODO - temporario ate ajuste das entidades
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation "org.springframework.boot:spring-boot-starter-json"
+
 }

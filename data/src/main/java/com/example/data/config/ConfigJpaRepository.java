@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableJpaRepositories(basePackages = "com.example.data")
 @EnableTransactionManagement
-@EntityScan("com.example")
-//TODO - @EntityScan("com.example.data")
+@EntityScan("com.example.data")
 public class ConfigJpaRepository {
 }
