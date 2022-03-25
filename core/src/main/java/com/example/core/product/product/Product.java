@@ -15,4 +15,12 @@ public class Product {
   private Set<Member> members = new HashSet();
   private Company company;
 
+  public Product(String name, String businessSegment) {
+    this.name = name;
+    this.businessSegment = businessSegment;
+  }
+
+  public Product(String name) {
+    this.name = name;
+  }
 }

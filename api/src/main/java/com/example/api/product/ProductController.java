@@ -1,8 +1,11 @@
 package com.example.api.product;
 
+import com.example.api.product.model.CreateProductDTO;
+import com.example.api.product.model.UpdateProductDTO;
 import com.example.core.product.product.Product;
 import com.example.core.product.usecase.AssignProductToCompanyUseCase;
 import com.example.core.product.usecase.CreateProductUseCase;
+import com.example.core.product.usecase.CreateProductUseCase.Request;
 import com.example.core.product.usecase.DeleteProductUseCase;
 import com.example.core.product.usecase.ListProductsUseCase;
 import com.example.core.product.usecase.UpdateProductUseCase;
@@ -39,8 +42,9 @@ public class ProductController {
   }
 
   @PostMapping("/create")
-  Product createProduct(@RequestBody Product product){
-    return createProduct.execute(product);
+  Product createProduct(@RequestBody CreateProductDTO dto){
+    final CreateProductUseCase.Request request = new Request(dto.getName(), dto.getBusinessSegment());
+    return createProduct.execute(request);
   }
 
   @DeleteMapping("/delete/{id}")
@@ -49,8 +53,9 @@ public class ProductController {
   }
 
   @PostMapping("/update/{id}")
-  Product updateProduct(@PathVariable Long id, @RequestBody Product product){
-    return updateProduct.execute(id, product);
+  Product updateProduct(@PathVariable Long id, @RequestBody UpdateProductDTO dto){
+    final UpdateProductUseCase.Request request = new UpdateProductUseCase.Request(dto.getName());
+    return updateProduct.execute(id, request);
   }
 
 }

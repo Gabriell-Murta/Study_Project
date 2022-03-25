@@ -13,4 +13,14 @@ public class Member {
   private String businessSegment;
   private Product product;
 
+  public Member(String name, String document, String documentType, String businessSegment) {
+    this.name = name;
+    this.document = document;
+    this.documentType = documentType;
+    this.businessSegment = businessSegment;
+  }
+
+  public Member(String name) {
+    this.name = name;
+  }
 }

@@ -1,8 +1,11 @@
 package com.example.api.member;
 
+import com.example.api.member.model.CreateMemberDTO;
+import com.example.api.member.model.UpdateMemberDTO;
 import com.example.core.member.member.Member;
 import com.example.core.member.usecase.AssignMemberToProductUseCase;
 import com.example.core.member.usecase.CreateMemberUseCase;
+import com.example.core.member.usecase.CreateMemberUseCase.Request;
 import com.example.core.member.usecase.DeleteMemberUseCase;
 import com.example.core.member.usecase.ListMembersUseCase;
 import com.example.core.member.usecase.UpdateMemberUseCase;
@@ -39,8 +42,9 @@ public class MemberController {
   }
 
   @PostMapping("/create")
-  Member createMember(@RequestBody Member member){
-    return createMemberUseCase.execute(member);
+  Member createMember(@RequestBody CreateMemberDTO dto){
+    final CreateMemberUseCase.Request request = new Request(dto.getName(), dto.getDocument(), dto.getDocumentType(), dto.getBusinessSegment());
+    return createMemberUseCase.execute(request);
   }
 
   @DeleteMapping("/delete/{id}")
@@ -49,8 +53,9 @@ public class MemberController {
   }
 
   @PostMapping("/update/{id}")
-  Member updateMember(@PathVariable Long id, @RequestBody Member member){
-    return updateMemberUseCase.execute(id, member);
+  Member updateMember(@PathVariable Long id, @RequestBody UpdateMemberDTO dto){
+    final UpdateMemberUseCase.Request request = new UpdateMemberUseCase.Request(dto.getName());
+    return updateMemberUseCase.execute(id, request);
   }
 
 }
