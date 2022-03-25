@@ -53,9 +53,9 @@ allprojects {
 }
 
 dependencies {
-	implementation project(':core')
-	implementation project(':data')
-	implementation project(':api')
+	implementation project(path: ':core', configuration: 'default')
+  implementation project(path: ':data', configuration: 'default')
+  implementation project(path: ':api', configuration: 'default')
 }
 
 tasks.named('test') {
