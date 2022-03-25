@@ -1,7 +1,9 @@
 package com.example.api.company;
 
+import com.example.api.company.model.CreateCompanyDTO;
 import com.example.core.company.company.Company;
 import com.example.core.company.usecase.CreateCompanyUseCase;
+import com.example.core.company.usecase.CreateCompanyUseCase.Request;
 import com.example.core.company.usecase.DeleteCompanyUseCase;
 import com.example.core.company.usecase.ListCompaniesUseCase;
 import com.example.core.company.usecase.UpdateCompanyUseCase;
@@ -30,8 +32,9 @@ public class CompanyController {
   public List<Company> getCompany(){ return listCompaniesUseCase.execute(); }
 
   @PostMapping("/create")
-  Company createCompany(@RequestBody Company company){
-    return createCompanyUseCase.execute(company);
+  Company createCompany(@RequestBody CreateCompanyDTO dto){
+    final CreateCompanyUseCase.Request request = new Request(dto.getName());
+    return createCompanyUseCase.execute(request);
   }
 
   @DeleteMapping("/delete/{id}")

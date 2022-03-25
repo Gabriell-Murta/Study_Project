@@ -13,4 +13,8 @@ public class Company {
   private String name;
   private Set<Product> products = new HashSet();
 
+  public Company(String name){
+    this.name = name;
+  }
+
 }
