@@ -1,5 +1,7 @@
 package com.example.api.company;
 
+import com.example.api.company.mapper.CompanyResponseMapper;
+import com.example.api.company.model.CompanyResponse;
 import com.example.api.company.model.CreateCompanyDTO;
 import com.example.api.company.model.UpdateCompanyDTO;
 import com.example.core.company.company.Company;
@@ -8,6 +10,8 @@ import com.example.core.company.usecase.DeleteCompanyUseCase;
 import com.example.core.company.usecase.ListCompaniesUseCase;
 import com.example.core.company.usecase.UpdateCompanyUseCase;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,14 +31,15 @@ public class CompanyController {
   private final CreateCompanyUseCase createCompanyUseCase;
   private final DeleteCompanyUseCase deleteCompanyUseCase;
   private final UpdateCompanyUseCase updateCompanyUseCase;
+  private final CompanyResponseMapper mapper = Mappers.getMapper(CompanyResponseMapper.class);
 
   @GetMapping
   public List<Company> getCompany(){ return listCompaniesUseCase.execute(); }
 
   @PostMapping("/create")
-  Company createCompany(@RequestBody CreateCompanyDTO dto){
+  public ResponseEntity<CompanyResponse> createCompany(@RequestBody CreateCompanyDTO dto){
     final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(dto.getName());
-    return createCompanyUseCase.execute(request);
+    return ResponseEntity.ok(mapper.toResponse(createCompanyUseCase.execute(request)));
   }
 
   @DeleteMapping("/delete/{id}")
