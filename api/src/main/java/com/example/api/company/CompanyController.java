@@ -50,8 +50,9 @@ public class CompanyController {
   }
 
   @DeleteMapping("/delete/{id}")
-  void deleteCompany(@PathVariable Long id){
+  public ResponseEntity<Void> deleteCompany(@PathVariable Long id){
     deleteCompanyUseCase.execute(id);
+    return ResponseEntity.ok().build();
   }
 
   @PostMapping("/update/{id}")

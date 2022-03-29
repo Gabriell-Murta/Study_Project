@@ -59,8 +59,9 @@ public class MemberController {
   }
 
   @DeleteMapping("/delete/{id}")
-  void deleteMember(@PathVariable Long id) {
+  public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
     deleteMemberUseCase.execute(id);
+    return ResponseEntity.ok().build();
   }
 
   @PostMapping("/update/{id}")
