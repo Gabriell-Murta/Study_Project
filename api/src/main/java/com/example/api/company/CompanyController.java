@@ -1,6 +1,7 @@
 package com.example.api.company;
 
 import com.example.api.company.mapper.CompanyResponseMapper;
+import com.example.api.company.model.CompaniesResponse;
 import com.example.api.company.model.CompanyResponse;
 import com.example.api.company.model.CreateCompanyDTO;
 import com.example.api.company.model.UpdateCompanyDTO;
@@ -9,6 +10,7 @@ import com.example.core.company.usecase.CreateCompanyUseCase;
 import com.example.core.company.usecase.DeleteCompanyUseCase;
 import com.example.core.company.usecase.ListCompaniesUseCase;
 import com.example.core.company.usecase.UpdateCompanyUseCase;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +36,17 @@ public class CompanyController {
   private final CompanyResponseMapper mapper = Mappers.getMapper(CompanyResponseMapper.class);
 
   @GetMapping
-  public List<Company> getCompany(){ return listCompaniesUseCase.execute(); }
+  public ResponseEntity<CompaniesResponse> getCompany(){
+    final List<Company> companies = listCompaniesUseCase.execute();
+    final List<CompanyResponse> responses = companies.stream().map(mapper::toResponse).collect(Collectors.toList());
+    return ResponseEntity.ok().body(new CompaniesResponse(responses));
+  }
 
   @PostMapping("/create")
   public ResponseEntity<CompanyResponse> createCompany(@RequestBody CreateCompanyDTO dto){
     final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(dto.getName());
-    return ResponseEntity.ok(mapper.toResponse(createCompanyUseCase.execute(request)));
+    final Company company = createCompanyUseCase.execute(request);
+    return ResponseEntity.ok(mapper.toResponse(company));
   }
 
   @DeleteMapping("/delete/{id}")
@@ -48,9 +55,10 @@ public class CompanyController {
   }
 
   @PostMapping("/update/{id}")
-  Company updateCompany(@PathVariable Long id, @RequestBody UpdateCompanyDTO dto){
+  public ResponseEntity<CompanyResponse> updateCompany(@PathVariable Long id, @RequestBody UpdateCompanyDTO dto){
     final UpdateCompanyUseCase.Request request = new UpdateCompanyUseCase.Request(dto.getName());
-    return updateCompanyUseCase.execute(id, request);
+    final Company company = updateCompanyUseCase.execute(id, request);
+    return ResponseEntity.ok(mapper.toResponse(company));
   }
 
 }

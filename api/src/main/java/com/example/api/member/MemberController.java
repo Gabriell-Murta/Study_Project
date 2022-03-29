@@ -1,7 +1,10 @@
 package com.example.api.member;
 
 import com.example.api.member.model.CreateMemberDTO;
+import com.example.api.member.model.MemberResponse;
+import com.example.api.member.model.MembersResponse;
 import com.example.api.member.model.UpdateMemberDTO;
+import com.example.api.member.mapper.MemberResponseMapper;
 import com.example.core.member.member.Member;
 import com.example.core.member.usecase.AssignMemberToProductUseCase;
 import com.example.core.member.usecase.CreateMemberUseCase;
@@ -9,7 +12,10 @@ import com.example.core.member.usecase.CreateMemberUseCase.Request;
 import com.example.core.member.usecase.DeleteMemberUseCase;
 import com.example.core.member.usecase.ListMembersUseCase;
 import com.example.core.member.usecase.UpdateMemberUseCase;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,21 +36,26 @@ public class MemberController {
   private final DeleteMemberUseCase deleteMemberUseCase;
   private final ListMembersUseCase listMembersUseCase;
   private final UpdateMemberUseCase updateMemberUseCase;
+  private final MemberResponseMapper mapper = Mappers.getMapper(MemberResponseMapper.class);
 
   @GetMapping
-  public List<Member> getMember(){
-    return listMembersUseCase.execute();
+  public ResponseEntity<MembersResponse> getMember(){
+    final List<Member> members = listMembersUseCase.execute();
+    final List<MemberResponse> responses = members.stream().map(mapper::toResponse).collect(Collectors.toList());
+    return ResponseEntity.ok().body(new MembersResponse(responses));
   }
 
   @PostMapping("/{memberId}/product/{productId}")
-  Member assignMemberToProduct(@PathVariable Long memberId, @PathVariable Long productId){
-    return assignMemberToProductUseCase.execute(memberId,productId);
+  public ResponseEntity<MemberResponse> assignMemberToProduct(@PathVariable Long memberId, @PathVariable Long productId){
+    final Member member = assignMemberToProductUseCase.execute(memberId,productId);
+    return ResponseEntity.ok(mapper.toResponse(member));
   }
 
   @PostMapping("/create")
-  Member createMember(@RequestBody CreateMemberDTO dto){
+  public ResponseEntity<MemberResponse> createMember(@RequestBody CreateMemberDTO dto){
     final CreateMemberUseCase.Request request = new Request(dto.getName(), dto.getDocument(), dto.getDocumentType(), dto.getBusinessSegment());
-    return createMemberUseCase.execute(request);
+    final Member member = createMemberUseCase.execute(request);
+    return ResponseEntity.ok(mapper.toResponse(member));
   }
 
   @DeleteMapping("/delete/{id}")
@@ -53,9 +64,10 @@ public class MemberController {
   }
 
   @PostMapping("/update/{id}")
-  Member updateMember(@PathVariable Long id, @RequestBody UpdateMemberDTO dto){
+  public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @RequestBody UpdateMemberDTO dto){
     final UpdateMemberUseCase.Request request = new UpdateMemberUseCase.Request(dto.getName());
-    return updateMemberUseCase.execute(id, request);
+    final Member member = updateMemberUseCase.execute(id, request);
+    return ResponseEntity.ok(mapper.toResponse(member));
   }
 
 }

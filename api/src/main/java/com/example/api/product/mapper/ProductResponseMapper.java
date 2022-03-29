@@ -1,4 +1,4 @@
-package com.example.api.product.model.mapper;
+package com.example.api.product.mapper;
 
 import com.example.api.product.model.ProductResponse;
 import com.example.core.product.product.Product;
