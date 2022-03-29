@@ -23,9 +23,17 @@ public class MemberGatewayImpl implements MemberGateway {
 
   @Override
   @Transactional
-  public List<Member> findMember() {
+  public List<Member> findMembers() {
     final List<MemberEntity> memberEntities = memberRepository.findAll();
     return memberEntities.stream().map(Member -> memberEntityMapper.fromEntity(Member, jpaContext)).collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional
+  public Member getMember(Long id){
+
+    final MemberEntity memberEntity = memberRepository.findById(id).get();
+    return memberEntityMapper.fromEntity(memberEntity, jpaContext);
   }
 
   @Override

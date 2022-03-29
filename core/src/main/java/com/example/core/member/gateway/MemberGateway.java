@@ -5,7 +5,9 @@ import java.util.List;
 
 public interface MemberGateway {
 
-  List<Member> findMember();
+  List<Member> findMembers();
+
+  Member getMember(Long id);
 
   Member saveMember(Member member);
 

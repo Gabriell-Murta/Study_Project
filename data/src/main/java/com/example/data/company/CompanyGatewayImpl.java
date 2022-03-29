@@ -4,7 +4,6 @@ import com.example.core.company.company.Company;
 import com.example.core.company.gateway.CompanyGateway;
 import com.example.data.company.entity.CompanyEntity;
 import com.example.data.company.mapper.CompanyEntityMapper;
-import java.util.Collections;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
@@ -24,9 +23,17 @@ public class CompanyGatewayImpl implements CompanyGateway {
 
   @Override
   @Transactional
-  public List<Company> findCompany() {
+  public List<Company> findCompanies() {
     final List<CompanyEntity> companyEntities = companyRepository.findAll();
     return  companyEntities.stream().map(Company -> companyEntityMapper.fromEntity(Company, jpaContext)).collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional
+  public Company getCompany(Long id){
+
+    final CompanyEntity companyEntity = companyRepository.findById(id).get();
+    return companyEntityMapper.fromEntity(companyEntity, jpaContext);
   }
 
   @Override

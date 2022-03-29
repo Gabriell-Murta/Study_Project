@@ -4,7 +4,6 @@ import com.example.core.product.gateway.ProductGateway;
 import com.example.core.product.product.Product;
 import com.example.data.product.entity.ProductEntity;
 import com.example.data.product.mapper.ProductEntityMapper;
-import java.util.Collections;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
@@ -24,10 +23,18 @@ public class ProductGatewayImpl implements ProductGateway {
 
   @Override
   @Transactional
-  public List<Product> findProduct() {
+  public List<Product> findProducts() {
 
     final List<ProductEntity> productEntities = productRepository.findAll();
     return productEntities.stream().map(Product -> productEntityMapper.fromEntity(Product, jpaContext)).collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional
+  public Product getProduct(Long id){
+
+    final ProductEntity productEntity = productRepository.findById(id).get();
+    return productEntityMapper.fromEntity(productEntity, jpaContext);
   }
 
   @Override

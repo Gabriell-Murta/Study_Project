@@ -5,7 +5,9 @@ import java.util.List;
 
 public interface CompanyGateway {
 
-  List<Company> findCompany();
+  List<Company> findCompanies();
+
+  Company getCompany(Long id);
 
   Company saveCompany(Company company);
 

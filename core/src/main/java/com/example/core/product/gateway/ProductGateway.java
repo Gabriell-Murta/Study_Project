@@ -5,7 +5,9 @@ import java.util.List;
 
 public interface ProductGateway {
 
-  List<Product> findProduct();
+  List<Product> findProducts();
+
+  Product getProduct(Long id);
 
   Product saveProduct(Product product);
 
