@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v2/company")
+@RequestMapping(path = "api/v2/companies")
 @RequiredArgsConstructor
 public class CompanyController {
 

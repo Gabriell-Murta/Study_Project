@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v2/member")
+@RequestMapping(path = "api/v2/members")
 @RequiredArgsConstructor
 public class MemberController {
 
