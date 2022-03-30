@@ -6,7 +6,6 @@ import com.example.api.product.model.ProductsResponse;
 import com.example.api.product.model.UpdateProductDTO;
 import com.example.api.product.mapper.ProductResponseMapper;
 import com.example.core.product.product.Product;
-import com.example.core.product.usecase.AssignProductToCompanyUseCase;
 import com.example.core.product.usecase.CreateProductUseCase;
 import com.example.core.product.usecase.CreateProductUseCase.Request;
 import com.example.core.product.usecase.DeleteProductUseCase;
@@ -33,7 +32,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-  private final AssignProductToCompanyUseCase assignProductToCompany;
   private final CreateProductUseCase createProduct;
   private final DeleteProductUseCase deleteProduct;
   private final GetProductUseCase getProductUseCase;
@@ -54,16 +52,11 @@ public class ProductController {
     return ResponseEntity.ok(mapper.toResponse(product));
   }
 
-  @PostMapping("/{productId}/company/{companyId}")
-  public ResponseEntity<ProductResponse> assignProductToCompany(@PathVariable Long productId, @PathVariable Long companyId){
-    final Product product = assignProductToCompany.execute(productId, companyId);
-    return ResponseEntity.ok(mapper.toResponse(product));
-  }
 
-  @PostMapping
-  public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductDTO dto){
+  @PostMapping("/{id}")
+  public ResponseEntity<ProductResponse> createProduct(@PathVariable Long id, @RequestBody CreateProductDTO dto){
     final CreateProductUseCase.Request request = new Request(dto.getName(), dto.getBusinessSegment());
-    final Product product = createProduct.execute(request);
+    final Product product = createProduct.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(product));
   }
 

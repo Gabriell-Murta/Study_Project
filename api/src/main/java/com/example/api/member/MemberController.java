@@ -6,7 +6,6 @@ import com.example.api.member.model.MembersResponse;
 import com.example.api.member.model.UpdateMemberDTO;
 import com.example.api.member.mapper.MemberResponseMapper;
 import com.example.core.member.member.Member;
-import com.example.core.member.usecase.AssignMemberToProductUseCase;
 import com.example.core.member.usecase.CreateMemberUseCase;
 import com.example.core.member.usecase.CreateMemberUseCase.Request;
 import com.example.core.member.usecase.DeleteMemberUseCase;
@@ -33,7 +32,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-  private final AssignMemberToProductUseCase assignMemberToProductUseCase;
   private final CreateMemberUseCase createMemberUseCase;
   private final DeleteMemberUseCase deleteMemberUseCase;
   private final GetMemberUseCase getMemberUseCase;
@@ -54,16 +52,10 @@ public class MemberController {
     return ResponseEntity.ok(mapper.toResponse(member));
   }
 
-  @PostMapping("/{memberId}/product/{productId}")
-  public ResponseEntity<MemberResponse> assignMemberToProduct(@PathVariable Long memberId, @PathVariable Long productId){
-    final Member member = assignMemberToProductUseCase.execute(memberId,productId);
-    return ResponseEntity.ok(mapper.toResponse(member));
-  }
-
-  @PostMapping
-  public ResponseEntity<MemberResponse> createMember(@RequestBody CreateMemberDTO dto){
+  @PostMapping("/{id}")
+  public ResponseEntity<MemberResponse> createMember(@PathVariable Long id, @RequestBody CreateMemberDTO dto){
     final CreateMemberUseCase.Request request = new Request(dto.getName(), dto.getDocument(), dto.getDocumentType(), dto.getBusinessSegment());
-    final Member member = createMemberUseCase.execute(request);
+    final Member member = createMemberUseCase.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(member));
   }
 
