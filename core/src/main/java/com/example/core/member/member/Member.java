@@ -1,9 +1,13 @@
 package com.example.core.member.member;
 
 import com.example.core.product.product.Product;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class Member {
 
   private Long id;

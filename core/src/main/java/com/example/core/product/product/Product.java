@@ -4,9 +4,13 @@ import com.example.core.company.company.Company;
 import com.example.core.member.member.Member;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class Product {
 
   private Long id;
