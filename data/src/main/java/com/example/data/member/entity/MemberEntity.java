@@ -35,7 +35,7 @@ public class MemberEntity {
   private String documentType;
   private String businessSegment;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.MERGE)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "product_id", referencedColumnName = "id")
   private ProductEntity product;

@@ -1,10 +1,12 @@
 package com.example.api.company;
 
+import com.example.api.company.mapper.CompanyRequestMapper;
 import com.example.api.company.mapper.CompanyResponseMapper;
 import com.example.api.company.model.CompaniesResponse;
 import com.example.api.company.model.CompanyResponse;
 import com.example.api.company.model.CreateCompanyDTO;
 import com.example.api.company.model.UpdateCompanyDTO;
+import com.example.api.product.mapper.ProductRequestMapper;
 import com.example.core.company.company.Company;
 import com.example.core.company.usecase.CreateCompanyUseCase;
 import com.example.core.company.usecase.DeleteCompanyUseCase;
@@ -37,6 +39,8 @@ public class CompanyController {
   private final GetCompanyUseCase getCompanyUseCase;
   private final UpdateCompanyUseCase updateCompanyUseCase;
   private final CompanyResponseMapper mapper = Mappers.getMapper(CompanyResponseMapper.class);
+  private final CompanyRequestMapper companyRequestMapper = Mappers.getMapper(CompanyRequestMapper.class);
+  private final ProductRequestMapper productRequestMapper = Mappers.getMapper(ProductRequestMapper.class);
 
   @GetMapping
   public ResponseEntity<CompaniesResponse> listCompanies(){
@@ -53,7 +57,8 @@ public class CompanyController {
 
   @PostMapping
   public ResponseEntity<CompanyResponse> createCompany(@RequestBody CreateCompanyDTO dto){
-    final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(dto.getName());
+    final Company companyRequest = companyRequestMapper.toCompany(dto);
+    final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(companyRequest);
     final Company company = createCompanyUseCase.execute(request);
     return ResponseEntity.ok(mapper.toResponse(company));
   }

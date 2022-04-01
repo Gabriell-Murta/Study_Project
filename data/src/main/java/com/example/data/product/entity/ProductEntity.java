@@ -43,7 +43,7 @@ public class ProductEntity {
   @OneToMany(mappedBy = "product")
   private Set<MemberEntity> members = new HashSet();
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.MERGE)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "company_id", referencedColumnName = "id")
   private CompanyEntity company;

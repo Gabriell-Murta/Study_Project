@@ -24,6 +24,12 @@ public class Product {
     this.businessSegment = businessSegment;
   }
 
+  public Product(String name, String businessSegment, Company company) {
+    this.name = name;
+    this.businessSegment = businessSegment;
+    this.company =company;
+  }
+
   public Product(String name) {
     this.name = name;
   }

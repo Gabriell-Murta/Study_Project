@@ -22,8 +22,8 @@ public class CreateProductUseCase {
   }
 
   public Product execute(final Long id ,final Request request){
-    final Product product = new Product(request.name, request.businessSegment);
     final Company company = companyGateway.findCompanyById(id);
-    product.setCompany(company);
-    return productGateway.saveProduct(product); }
+    final Product product = new Product(request.name, request.businessSegment, company);
+    return productGateway.saveProduct(product);
+  }
 }
