@@ -13,6 +13,7 @@ import com.example.core.company.usecase.DeleteCompanyUseCase;
 import com.example.core.company.usecase.GetCompanyUseCase;
 import com.example.core.company.usecase.ListCompaniesUseCase;
 import com.example.core.company.usecase.UpdateCompanyUseCase;
+import com.example.core.product.product.Product;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
@@ -58,7 +59,8 @@ public class CompanyController {
   @PostMapping
   public ResponseEntity<CompanyResponse> createCompany(@RequestBody CreateCompanyDTO dto){
     final Company companyRequest = companyRequestMapper.toCompany(dto);
-    final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(companyRequest);
+    final Product productRequest = productRequestMapper.toProduct(dto.getProduct());
+    final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(companyRequest, productRequest);
     final Company company = createCompanyUseCase.execute(request);
     return ResponseEntity.ok(mapper.toResponse(company));
   }

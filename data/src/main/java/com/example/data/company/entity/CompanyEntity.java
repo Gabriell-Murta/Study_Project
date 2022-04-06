@@ -4,6 +4,7 @@ import com.example.data.product.entity.ProductEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
-@Entity
+@Entity(name = "Company")
 @Table(name = "company")
 public class CompanyEntity {
   @Id
@@ -30,8 +32,9 @@ public class CompanyEntity {
   private Long id;
   private String name;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "company")
+  @OneToMany(mappedBy = "company",
+  cascade = CascadeType.ALL,
+  orphanRemoval = true)
   private Set<ProductEntity> products = new HashSet();
 
 }
