@@ -1,10 +1,24 @@
+import org.flywaydb.gradle.task.FlywayMigrateTask
 
+plugins {
+    id "org.flywaydb.flyway" version "8.5.7"
+}
 bootJar {
 	enabled = false
 }
 
 jar {
 	enabled = true
+}
+
+flyway {
+    baselineOnMigrate = true
+}
+
+task migrateLocal(type: FlywayMigrateTask) {
+    configFiles = [
+            'src/main/resources/flyway-dev.config'
+    ]
 }
 
 dependencies {
