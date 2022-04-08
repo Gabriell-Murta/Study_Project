@@ -13,6 +13,7 @@ buildscript {
 
 plugins {
 	id 'java'
+	id "org.flywaydb.flyway" version "8.5.7"
 }
 
 group = 'com.example'
@@ -60,4 +61,10 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+flyway{
+    url = "jdbc:postgresql://localhost:5432/study"
+    user = "quintoandar"
+    password = "6&65*D!5*&g#%#@5d*X&EtW7L8g*@&6"
 }
