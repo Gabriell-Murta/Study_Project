@@ -6,10 +6,10 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-company:/var/lib/postgresql/data
+      - postgres-study:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: company
+      POSTGRES_DB: study
       POSTGRES_USER: quintoandar
       POSTGRES_PASSWORD: 6&65*D!5*&g#%#@5d*X&$EtW7L8g*@&6
 volumes:
-  postgres-company:
+  postgres-study:
