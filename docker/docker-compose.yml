@@ -10,6 +10,6 @@ services:
     environment:
       POSTGRES_DB: study
       POSTGRES_USER: quintoandar
-      POSTGRES_PASSWORD: 6&65*D!5*&g#%#@5d*X&$EtW7L8g*@&6
+      POSTGRES_PASSWORD: quintoandar
 volumes:
   postgres-study:
