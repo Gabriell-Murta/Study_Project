@@ -21,5 +21,5 @@ CREATE TABLE IF NOT EXISTS member
     business_segment    VARCHAR(255) NOT NULL,
     document            VARCHAR(255) NOT NULL,
     document_type       VARCHAR(255) NOT NULL,
-    CONSTRAINT productidmemberfk FOREIGN KEY (product_id) REFERENCES product,
+    CONSTRAINT productidmemberfk FOREIGN KEY (product_id) REFERENCES product
 );
