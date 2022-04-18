@@ -20,15 +20,7 @@ import lombok.ToString;
 @Table(name = "company")
 public class CompanyEntity {
   @Id
-  @SequenceGenerator(
-      name = "company_sequence",
-      sequenceName = "company_sequence",
-      allocationSize = 1
-  )
-  @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "company_sequence"
-  )
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
 

@@ -17,15 +17,7 @@ import lombok.Data;
 public class MemberEntity {
 
   @Id
-  @SequenceGenerator(
-      name = "member_sequence",
-      sequenceName = "member_sequence",
-      allocationSize = 1
-  )
-  @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "member_sequence"
-  )
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
   private String document;

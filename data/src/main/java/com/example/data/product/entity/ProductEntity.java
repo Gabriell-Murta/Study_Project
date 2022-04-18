@@ -22,15 +22,7 @@ import lombok.ToString;
 public class ProductEntity {
 
   @Id
-  @SequenceGenerator(
-      name = "product_sequence",
-      sequenceName = "product_sequence",
-      allocationSize = 1
-  )
-  @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "product_sequence"
-  )
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
   private String businessSegment;
