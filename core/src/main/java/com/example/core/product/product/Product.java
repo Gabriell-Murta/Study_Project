@@ -2,8 +2,8 @@ package com.example.core.product.product;
 
 import com.example.core.company.company.Company;
 import com.example.core.member.member.Member;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ public class Product {
   private Long id;
   private String name;
   private String businessSegment;
-  private Set<Member> members = new HashSet();
+  private List<Member> members = new ArrayList<>();
   private Company company;
 
   public Product(String name, String businessSegment) {

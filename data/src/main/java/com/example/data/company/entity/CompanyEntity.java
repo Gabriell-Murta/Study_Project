@@ -1,16 +1,14 @@
 package com.example.data.company.entity;
 
 import com.example.data.product.entity.ProductEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
@@ -27,6 +25,7 @@ public class CompanyEntity {
   @OneToMany(mappedBy = "company",
   cascade = CascadeType.ALL,
   orphanRemoval = true)
-  private Set<ProductEntity> products = new HashSet();
+  @ToString.Exclude
+  private List<ProductEntity> products = new ArrayList<>();
 
 }

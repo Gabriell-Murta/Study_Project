@@ -7,9 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity(name = "Member")
@@ -25,5 +25,6 @@ public class MemberEntity {
   private String businessSegment;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @ToString.Exclude
   private ProductEntity product;
 }
