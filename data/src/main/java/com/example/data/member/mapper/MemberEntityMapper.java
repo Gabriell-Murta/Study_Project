@@ -12,6 +12,7 @@ public interface MemberEntityMapper {
 
   MemberEntity toEntity(Member memberEntity, @Context JpaContext ctx);
 
+  @Mapping(target = "product", ignore = true)
   Member fromEntity(MemberEntity memberEntity, @Context JpaContext ctx);
 
 }
