@@ -67,7 +67,11 @@ public class MemberController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @RequestBody UpdateMemberDTO dto){
-    final UpdateMemberUseCase.Request request = new UpdateMemberUseCase.Request(dto.getName());
+    final UpdateMemberUseCase.Request request = new UpdateMemberUseCase.Request(
+        dto.getName(),
+        dto.getDocument(),
+        dto.getDocumentType(),
+        dto.getBusinessSegment());
     final Member member = updateMemberUseCase.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(member));
   }

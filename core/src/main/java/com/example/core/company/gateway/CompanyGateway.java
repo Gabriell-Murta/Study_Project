@@ -15,4 +15,6 @@ public interface CompanyGateway {
 
   Company findCompanyById(Long id);
 
+  Company updateCompany(Company company);
+
 }

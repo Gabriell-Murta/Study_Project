@@ -68,7 +68,7 @@ public class ProductController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @RequestBody UpdateProductDTO dto){
-    final UpdateProductUseCase.Request request = new UpdateProductUseCase.Request(dto.getName());
+    final UpdateProductUseCase.Request request = new UpdateProductUseCase.Request(dto.getName(), dto.getBusinessSegment());
     final Product product = updateProduct.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(product));
   }

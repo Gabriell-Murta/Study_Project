@@ -59,4 +59,19 @@ public class ProductGatewayImpl implements ProductGateway {
     final ProductEntity productEntity = productRepository.findById(id).get();
     return productEntityMapper.fromEntity(productEntity, jpaContext);
   }
+
+  @Override
+  @Transactional
+  public Product updateProduct(Product product){
+    final ProductEntity productEntity = productRepository.findById(product.getId()).get();
+    final ProductEntity entity = updateProductEntity(productEntity, product);
+    final ProductEntity updatedProduct = productRepository.save(entity);
+    return productEntityMapper.fromEntity(updatedProduct, jpaContext);
+  }
+
+  private ProductEntity updateProductEntity(final ProductEntity productEntity, final Product product){
+    productEntity.setName(product.getName());
+    productEntity.setBusinessSegment(product.getBusinessSegment());
+    return productEntity;
+  }
 }

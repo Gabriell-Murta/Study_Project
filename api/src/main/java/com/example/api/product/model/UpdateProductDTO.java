@@ -6,4 +6,5 @@ import lombok.Data;
 public class UpdateProductDTO {
 
   private String name;
+  private String businessSegment;
 }

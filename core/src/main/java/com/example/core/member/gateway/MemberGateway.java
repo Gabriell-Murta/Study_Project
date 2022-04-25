@@ -15,4 +15,6 @@ public interface MemberGateway {
 
   Member findMemberById(Long id);
 
+  Member updateMember(Member member);
+
 }

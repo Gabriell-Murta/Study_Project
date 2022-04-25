@@ -58,4 +58,18 @@ public class CompanyGatewayImpl implements CompanyGateway {
     final CompanyEntity companyEntity = companyRepository.findById(id).get();
     return companyEntityMapper.fromEntity(companyEntity, jpaContext);
   }
+
+  @Override
+  @Transactional
+  public Company updateCompany(Company company){
+    final CompanyEntity companyEntity = companyRepository.findById(company.getId()).get();
+    final CompanyEntity entity = updateCompanyEntity(companyEntity, company);
+    final CompanyEntity updatedCompany = companyRepository.save(entity);
+    return companyEntityMapper.fromEntity(updatedCompany, jpaContext);
+  }
+
+  private CompanyEntity updateCompanyEntity(final CompanyEntity companyEntity, final Company company){
+    companyEntity.setName(company.getName());
+    return companyEntity;
+  }
 }

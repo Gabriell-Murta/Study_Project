@@ -27,7 +27,7 @@ public class UpdateCompanyUseCase {
       company.setName(companyUpdate.getName());
     }
 
-    companyGateway.saveCompany(company);
+    companyGateway.updateCompany(company);
     return company;
   }
 }

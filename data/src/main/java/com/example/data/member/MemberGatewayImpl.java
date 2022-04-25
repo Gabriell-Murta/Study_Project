@@ -58,4 +58,21 @@ public class MemberGatewayImpl implements MemberGateway {
     final MemberEntity memberEntity = memberRepository.findById(id).get();
     return memberEntityMapper.fromEntity(memberEntity, jpaContext);
   }
+
+  @Override
+  @Transactional
+  public Member updateMember(Member member){
+    final MemberEntity memberEntity = memberRepository.findById(member.getId()).get();
+    final MemberEntity entity = updateMemberEntity(memberEntity, member);
+    final MemberEntity updatedMember = memberRepository.save(entity);
+    return memberEntityMapper.fromEntity(updatedMember, jpaContext);
+  }
+
+  private MemberEntity updateMemberEntity(final MemberEntity memberEntity, final Member member){
+    memberEntity.setName(member.getName());
+    memberEntity.setBusinessSegment(member.getBusinessSegment());
+    memberEntity.setDocument(member.getDocument());
+    memberEntity.setDocumentType(member.getDocumentType());
+    return memberEntity;
+  }
 }

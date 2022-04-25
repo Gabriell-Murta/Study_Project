@@ -6,4 +6,7 @@ import lombok.Data;
 public class UpdateMemberDTO {
 
   private String name;
+  private String document;
+  private String documentType;
+  private String businessSegment;
 }

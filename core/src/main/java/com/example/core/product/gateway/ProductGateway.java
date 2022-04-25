@@ -15,4 +15,6 @@ public interface ProductGateway {
 
   Product findProductById(Long id);
 
+  Product updateProduct(Product product);
+
 }
