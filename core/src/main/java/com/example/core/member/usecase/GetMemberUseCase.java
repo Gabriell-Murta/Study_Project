@@ -11,7 +11,7 @@ public class GetMemberUseCase {
 
   private final MemberGateway memberGateway;
 
-  public Member execute(Long id){
+  public Member execute(final Long id){
     return memberGateway.getMember(id);
   }
 

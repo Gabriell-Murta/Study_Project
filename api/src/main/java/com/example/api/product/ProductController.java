@@ -47,27 +47,27 @@ public class ProductController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id){
+  public ResponseEntity<ProductResponse> getProduct(@PathVariable final Long id){
     final Product product = getProductUseCase.execute(id);
     return ResponseEntity.ok(mapper.toResponse(product));
   }
 
 
   @PostMapping("/{id}")
-  public ResponseEntity<ProductResponse> createProduct(@PathVariable Long id, @RequestBody CreateProductDTO dto){
+  public ResponseEntity<ProductResponse> createProduct(@PathVariable final Long id, @RequestBody final CreateProductDTO dto){
     final CreateProductUseCase.Request request = new Request(dto.getName(), dto.getBusinessSegment());
     final Product product = createProduct.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(product));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+  public ResponseEntity<Void> deleteProduct(@PathVariable final Long id) {
     deleteProduct.execute(id);
     return ResponseEntity.ok().build();
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @RequestBody UpdateProductDTO dto){
+  public ResponseEntity<ProductResponse> updateProduct(@PathVariable final Long id, @RequestBody final UpdateProductDTO dto){
     final UpdateProductUseCase.Request request = new UpdateProductUseCase.Request(dto.getName(), dto.getBusinessSegment());
     final Product product = updateProduct.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(product));

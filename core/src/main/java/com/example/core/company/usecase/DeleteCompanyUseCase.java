@@ -10,6 +10,6 @@ public class DeleteCompanyUseCase {
 
   private final CompanyGateway companyGateway;
 
-  public void execute(Long id){ companyGateway.deleteCompanyById(id); }
+  public void execute(final Long id){ companyGateway.deleteCompanyById(id); }
 
 }

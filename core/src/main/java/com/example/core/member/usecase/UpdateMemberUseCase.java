@@ -22,9 +22,9 @@ public class UpdateMemberUseCase {
     private final String businessSegment;
   }
 
-  public Member execute(Long id, Request request){
+  public Member execute(final Long id, final Request request){
     Member member = memberGateway.findMemberById(id);
-    Member memberUpdate = new Member(request.name, request.document, request.documentType,
+    final Member memberUpdate = new Member(request.name, request.document, request.documentType,
         request.businessSegment);
 
     if (ValidationHelper.fieldHasValidValue(memberUpdate.getName())){

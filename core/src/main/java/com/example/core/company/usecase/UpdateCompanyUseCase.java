@@ -19,9 +19,9 @@ public class UpdateCompanyUseCase {
 
   }
 
-  public Company execute(Long id, Request request){
+  public Company execute(final Long id, final Request request){
     Company company = companyGateway.findCompanyById(id);
-    Company companyUpdate = new Company(request.name);
+    final Company companyUpdate = new Company(request.name);
 
     if(companyUpdate.getName() != null && !companyUpdate.getName().isEmpty()){
       company.setName(companyUpdate.getName());

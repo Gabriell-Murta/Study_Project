@@ -10,6 +10,6 @@ public class DeleteProductUseCase {
 
   private final ProductGateway productGateway;
 
-  public void execute(Long id){ productGateway.deleteProductById(id); }
+  public void execute(final Long id){ productGateway.deleteProductById(id); }
 
 }

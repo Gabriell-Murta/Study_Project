@@ -47,26 +47,26 @@ public class MemberController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<MemberResponse> getMember(@PathVariable Long id){
+  public ResponseEntity<MemberResponse> getMember(@PathVariable final Long id){
     final Member member = getMemberUseCase.execute(id);
     return ResponseEntity.ok(mapper.toResponse(member));
   }
 
   @PostMapping("/{id}")
-  public ResponseEntity<MemberResponse> createMember(@PathVariable Long id, @RequestBody CreateMemberDTO dto){
+  public ResponseEntity<MemberResponse> createMember(@PathVariable final Long id, @RequestBody final CreateMemberDTO dto){
     final CreateMemberUseCase.Request request = new Request(dto.getName(), dto.getDocument(), dto.getDocumentType(), dto.getBusinessSegment());
     final Member member = createMemberUseCase.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(member));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
+  public ResponseEntity<Void> deleteMember(@PathVariable final Long id) {
     deleteMemberUseCase.execute(id);
     return ResponseEntity.ok().build();
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @RequestBody UpdateMemberDTO dto){
+  public ResponseEntity<MemberResponse> updateMember(@PathVariable final Long id, @RequestBody final UpdateMemberDTO dto){
     final UpdateMemberUseCase.Request request = new UpdateMemberUseCase.Request(
         dto.getName(),
         dto.getDocument(),

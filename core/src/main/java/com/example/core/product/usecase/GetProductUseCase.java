@@ -11,7 +11,7 @@ public class GetProductUseCase {
 
   private final ProductGateway productGateway;
 
-  public Product execute(Long id) {
+  public Product execute(final Long id) {
     return productGateway.getProduct(id);
   }
 }

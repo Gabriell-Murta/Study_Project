@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class MemberResponse {
 
-  private Long id;
-  private String name;
-  private String document;
-  private String documentType;
-  private String businessSegment;
+  private final Long id;
+  private final String name;
+  private final String document;
+  private final String documentType;
+  private final String businessSegment;
 }

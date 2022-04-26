@@ -10,6 +10,6 @@ public class DeleteMemberUseCase {
 
   private final MemberGateway memberGateway;
 
-  public void execute(Long id){ memberGateway.deleteMemberById(id); }
+  public void execute(final Long id){ memberGateway.deleteMemberById(id); }
 
 }

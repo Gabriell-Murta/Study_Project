@@ -51,13 +51,13 @@ public class CompanyController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<CompanyResponse> getCompany(@PathVariable Long id) {
+  public ResponseEntity<CompanyResponse> getCompany(@PathVariable final Long id) {
     final Company company = getCompanyUseCase.execute(id);
     return ResponseEntity.ok(mapper.toResponse(company));
   }
 
   @PostMapping
-  public ResponseEntity<CompanyResponse> createCompany(@RequestBody CreateCompanyDTO dto){
+  public ResponseEntity<CompanyResponse> createCompany(@RequestBody final CreateCompanyDTO dto){
     final Company companyRequest = companyRequestMapper.toCompany(dto);
     final Product productRequest = productRequestMapper.toProduct(dto.getProduct());
     final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(companyRequest, productRequest);
@@ -66,13 +66,13 @@ public class CompanyController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteCompany(@PathVariable Long id){
+  public ResponseEntity<Void> deleteCompany(@PathVariable final Long id){
     deleteCompanyUseCase.execute(id);
     return ResponseEntity.ok().build();
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<CompanyResponse> updateCompany(@PathVariable Long id, @RequestBody UpdateCompanyDTO dto){
+  public ResponseEntity<CompanyResponse> updateCompany(@PathVariable final Long id, @RequestBody final UpdateCompanyDTO dto){
     final UpdateCompanyUseCase.Request request = new UpdateCompanyUseCase.Request(dto.getName());
     final Company company = updateCompanyUseCase.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(company));

@@ -11,7 +11,7 @@ public class GetCompanyUseCase {
 
   private final CompanyGateway companyGateway;
 
-  public Company execute(Long id){
+  public Company execute(final Long id){
     return companyGateway.getCompany(id);
   }
 

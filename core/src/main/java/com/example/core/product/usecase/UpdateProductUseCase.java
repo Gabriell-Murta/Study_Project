@@ -19,9 +19,9 @@ public class UpdateProductUseCase {
     private final String businessSegment;
   }
 
-  public Product execute(Long id, Request request){
+  public Product execute(final Long id, final Request request){
     Product product = productGateway.findProductById(id);
-    Product productUpdate = new Product(request.name, request.businessSegment);
+    final Product productUpdate = new Product(request.name, request.businessSegment);
 
     if (ValidationHelper.fieldHasValidValue(productUpdate.getName())){
       product.setName(productUpdate.getName());
