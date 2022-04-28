@@ -69,6 +69,13 @@ public class ProductGatewayImpl implements ProductGateway {
     return productEntityMapper.fromEntity(updatedProduct, jpaContext);
   }
 
+  @Override
+  @Transactional
+  public boolean existsProduct(final Long id){
+    final boolean exists = productRepository.existsById(id);
+    return exists;
+  }
+
   private ProductEntity updateProductEntity(final ProductEntity productEntity, final Product product){
     productEntity.setName(product.getName());
     productEntity.setBusinessSegment(product.getBusinessSegment());

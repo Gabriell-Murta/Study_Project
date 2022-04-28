@@ -68,6 +68,13 @@ public class MemberGatewayImpl implements MemberGateway {
     return memberEntityMapper.fromEntity(updatedMember, jpaContext);
   }
 
+  @Override
+  @Transactional
+  public boolean existsMember(final Long id){
+    final boolean exists = memberRepository.existsById(id);
+    return exists;
+  }
+
   private MemberEntity updateMemberEntity(final MemberEntity memberEntity, final Member member){
     memberEntity.setName(member.getName());
     memberEntity.setBusinessSegment(member.getBusinessSegment());

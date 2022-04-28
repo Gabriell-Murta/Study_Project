@@ -2,6 +2,7 @@ package com.example.core.company.usecase;
 
 import com.example.core.company.company.Company;
 import com.example.core.company.gateway.CompanyGateway;
+import com.example.core.exceptions.CompanyNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,11 @@ public class UpdateCompanyUseCase {
   }
 
   public Company execute(final Long id, final Request request){
+
+    if (!companyGateway.existsCompany(id)){
+      throw new CompanyNotFoundException(id);
+    }
+
     Company company = companyGateway.findCompanyById(id);
     final Company companyUpdate = new Company(request.name);
 

@@ -17,4 +17,6 @@ public interface CompanyGateway {
 
   Company updateCompany(Company company);
 
+  boolean existsCompany(Long id);
+
 }

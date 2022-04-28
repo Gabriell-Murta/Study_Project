@@ -17,4 +17,6 @@ public interface MemberGateway {
 
   Member updateMember(Member member);
 
+  boolean existsMember(Long id);
+
 }

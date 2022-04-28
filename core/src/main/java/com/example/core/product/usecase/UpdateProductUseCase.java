@@ -1,5 +1,6 @@
 package com.example.core.product.usecase;
 
+import com.example.core.exceptions.ProductNotFoundException;
 import com.example.core.product.gateway.ProductGateway;
 import com.example.core.product.product.Product;
 import com.example.core.utils.ValidationHelper;
@@ -20,6 +21,11 @@ public class UpdateProductUseCase {
   }
 
   public Product execute(final Long id, final Request request){
+
+    if (!productGateway.existsProduct(id)){
+      throw new ProductNotFoundException(id);
+    }
+
     Product product = productGateway.findProductById(id);
     final Product productUpdate = new Product(request.name, request.businessSegment);
 

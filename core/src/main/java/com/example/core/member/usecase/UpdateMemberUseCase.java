@@ -1,5 +1,6 @@
 package com.example.core.member.usecase;
 
+import com.example.core.exceptions.MemberNotFoundException;
 import com.example.core.member.gateway.MemberGateway;
 import com.example.core.member.member.Member;
 import com.example.core.utils.ValidationHelper;
@@ -23,6 +24,11 @@ public class UpdateMemberUseCase {
   }
 
   public Member execute(final Long id, final Request request){
+
+    if (!memberGateway.existsMember(id)){
+      throw new MemberNotFoundException(id);
+    }
+
     Member member = memberGateway.findMemberById(id);
     final Member memberUpdate = new Member(request.name, request.document, request.documentType,
         request.businessSegment);

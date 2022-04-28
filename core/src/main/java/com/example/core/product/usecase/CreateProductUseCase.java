@@ -2,6 +2,7 @@ package com.example.core.product.usecase;
 
 import com.example.core.company.company.Company;
 import com.example.core.company.gateway.CompanyGateway;
+import com.example.core.exceptions.CompanyNotFoundException;
 import com.example.core.product.gateway.ProductGateway;
 import com.example.core.product.product.Product;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,11 @@ public class CreateProductUseCase {
   }
 
   public Product execute(final Long id ,final Request request){
+
+    if (!companyGateway.existsCompany(id)){
+      throw new CompanyNotFoundException(id);
+    }
+
     final Company company = companyGateway.findCompanyById(id);
     final Product product = new Product(request.name, request.businessSegment, company);
     return productGateway.saveProduct(product);

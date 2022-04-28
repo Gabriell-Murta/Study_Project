@@ -68,6 +68,13 @@ public class CompanyGatewayImpl implements CompanyGateway {
     return companyEntityMapper.fromEntity(updatedCompany, jpaContext);
   }
 
+  @Override
+  @Transactional
+  public boolean existsCompany(final Long id){
+    final boolean exists = companyRepository.existsById(id);
+    return exists;
+  }
+
   private CompanyEntity updateCompanyEntity(final CompanyEntity companyEntity, final Company company){
     companyEntity.setName(company.getName());
     return companyEntity;

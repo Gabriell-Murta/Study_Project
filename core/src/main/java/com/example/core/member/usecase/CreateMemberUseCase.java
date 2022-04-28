@@ -1,5 +1,6 @@
 package com.example.core.member.usecase;
 
+import com.example.core.exceptions.ProductNotFoundException;
 import com.example.core.member.gateway.MemberGateway;
 import com.example.core.member.member.Member;
 import com.example.core.product.gateway.ProductGateway;
@@ -26,6 +27,11 @@ public class CreateMemberUseCase {
   }
 
   public Member execute(final Long id, final Request request){
+
+    if (!productGateway.existsProduct(id)){
+      throw new ProductNotFoundException(id);
+    }
+
     final Member member = new Member(request.name, request.document, request.documentType, request.businessSegment);
     final Product product = productGateway.findProductById(id);
     member.setProduct(product);

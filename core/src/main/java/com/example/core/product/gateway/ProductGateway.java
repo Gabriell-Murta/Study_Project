@@ -17,4 +17,6 @@ public interface ProductGateway {
 
   Product updateProduct(Product product);
 
+  boolean existsProduct(Long id);
+
 }
