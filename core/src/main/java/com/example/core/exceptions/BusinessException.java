@@ -31,7 +31,13 @@ public abstract class BusinessException extends RuntimeException {
 
     PRODUCT_NOT_FOUND_EXCEPTION(4001, "No Subsidiary Product found with provided ID"),
 
-    MEMBER_NOT_FOUND_EXCEPTION(4002, "No Member found with provided ID");
+    MEMBER_NOT_FOUND_EXCEPTION(4002, "No Member found with provided ID"),
+
+    INVALID_COMPANY_EXCEPTION(4003, "CompanyName cannot be empty"),
+
+    INVALID_PRODUCT_EXCEPTION(4004, "ProductName or BusinessSegment cannot be empty"),
+
+    INVALID_MEMBER_EXCEPTION(4005, "MemberName, BusinessSegment, Document or DocumentType cannot be empty");
 
     private long code;
     private String message;

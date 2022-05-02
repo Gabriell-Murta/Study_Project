@@ -15,6 +15,7 @@ import com.example.core.company.usecase.ListCompaniesUseCase;
 import com.example.core.company.usecase.UpdateCompanyUseCase;
 import com.example.core.product.product.Product;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,7 @@ public class CompanyController {
   }
 
   @PostMapping
-  public ResponseEntity<CompanyResponse> createCompany(@RequestBody final CreateCompanyDTO dto){
+  public ResponseEntity<CompanyResponse> createCompany(@RequestBody final @Valid CreateCompanyDTO dto){
     final Company companyRequest = companyRequestMapper.toCompany(dto);
     final Product productRequest = productRequestMapper.toProduct(dto.getProduct());
     final CreateCompanyUseCase.Request request = new CreateCompanyUseCase.Request(companyRequest, productRequest);
@@ -72,7 +73,7 @@ public class CompanyController {
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<CompanyResponse> updateCompany(@PathVariable final Long id, @RequestBody final UpdateCompanyDTO dto){
+  public ResponseEntity<CompanyResponse> updateCompany(@PathVariable final Long id, @RequestBody @Valid final UpdateCompanyDTO dto){
     final UpdateCompanyUseCase.Request request = new UpdateCompanyUseCase.Request(dto.getName());
     final Company company = updateCompanyUseCase.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(company));

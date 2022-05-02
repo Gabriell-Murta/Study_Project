@@ -13,6 +13,7 @@ import com.example.core.member.usecase.GetMemberUseCase;
 import com.example.core.member.usecase.ListMembersUseCase;
 import com.example.core.member.usecase.UpdateMemberUseCase;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +54,7 @@ public class MemberController {
   }
 
   @PostMapping("/{id}")
-  public ResponseEntity<MemberResponse> createMember(@PathVariable final Long id, @RequestBody final CreateMemberDTO dto){
+  public ResponseEntity<MemberResponse> createMember(@PathVariable final Long id, @RequestBody @Valid final CreateMemberDTO dto){
     final CreateMemberUseCase.Request request = new Request(dto.getName(), dto.getDocument(), dto.getDocumentType(), dto.getBusinessSegment());
     final Member member = createMemberUseCase.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(member));
@@ -66,7 +67,7 @@ public class MemberController {
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<MemberResponse> updateMember(@PathVariable final Long id, @RequestBody final UpdateMemberDTO dto){
+  public ResponseEntity<MemberResponse> updateMember(@PathVariable final Long id, @RequestBody @Valid final UpdateMemberDTO dto){
     final UpdateMemberUseCase.Request request = new UpdateMemberUseCase.Request(
         dto.getName(),
         dto.getDocument(),

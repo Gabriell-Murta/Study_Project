@@ -13,6 +13,7 @@ import com.example.core.product.usecase.GetProductUseCase;
 import com.example.core.product.usecase.ListProductsUseCase;
 import com.example.core.product.usecase.UpdateProductUseCase;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +55,7 @@ public class ProductController {
 
 
   @PostMapping("/{id}")
-  public ResponseEntity<ProductResponse> createProduct(@PathVariable final Long id, @RequestBody final CreateProductDTO dto){
+  public ResponseEntity<ProductResponse> createProduct(@PathVariable final Long id, @RequestBody @Valid final CreateProductDTO dto){
     final CreateProductUseCase.Request request = new Request(dto.getName(), dto.getBusinessSegment());
     final Product product = createProduct.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(product));
@@ -67,7 +68,7 @@ public class ProductController {
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<ProductResponse> updateProduct(@PathVariable final Long id, @RequestBody final UpdateProductDTO dto){
+  public ResponseEntity<ProductResponse> updateProduct(@PathVariable final Long id, @RequestBody @Valid final UpdateProductDTO dto){
     final UpdateProductUseCase.Request request = new UpdateProductUseCase.Request(dto.getName(), dto.getBusinessSegment());
     final Product product = updateProduct.execute(id, request);
     return ResponseEntity.ok(mapper.toResponse(product));

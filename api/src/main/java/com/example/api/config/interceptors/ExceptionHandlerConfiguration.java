@@ -17,8 +17,6 @@ public class ExceptionHandlerConfiguration {
 
   @ExceptionHandler(RuntimeException.class)
   public @ResponseBody ResponseEntity exceptionHandler(final RuntimeException exception){
-    //if(exception instanceof BusinessException){
       return new BusinessExceptionResponseBuilder((BusinessException) exception, HttpStatus.BAD_REQUEST).build();
-    //}
   }
 }

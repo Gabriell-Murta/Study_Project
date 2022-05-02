@@ -1,13 +1,14 @@
 package com.example.api.member.model;
 
+import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 public class CreateMemberDTO {
 
-  private String name;
-  private String document;
-  private String documentType;
-  private String businessSegment;
+  @NotBlank private String name;
+  @NotBlank private String document;
+  @NotBlank private String documentType;
+  @NotBlank private String businessSegment;
 
 }
