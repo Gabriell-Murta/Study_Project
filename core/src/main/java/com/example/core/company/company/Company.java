@@ -5,11 +5,13 @@ import com.example.core.product.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Data
+@Builder(toBuilder = true)
 @NoArgsConstructor
 public class Company {
 
