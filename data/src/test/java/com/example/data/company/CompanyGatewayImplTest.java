@@ -9,14 +9,12 @@ import static org.mockito.Mockito.when;
 
 import com.example.core.company.company.Company;
 import com.example.data.company.entity.CompanyEntity;
-import com.example.data.company.mapper.CompanyEntityMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
