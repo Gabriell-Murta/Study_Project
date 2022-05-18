@@ -17,7 +17,7 @@ public class GetCompanyUseCase {
     if (!companyGateway.existsCompany(id)){
       throw new CompanyNotFoundException(id);
     }
-    return companyGateway.getCompany(id);
+    return companyGateway.findCompanyById(id);
   }
 
 }

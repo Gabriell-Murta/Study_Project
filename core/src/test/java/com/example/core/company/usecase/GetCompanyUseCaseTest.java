@@ -41,7 +41,7 @@ class GetCompanyUseCaseTest {
     final Long id = rd.nextLong();
     company.setName("SomeCompany");
     when(companyGateway.existsCompany(anyLong())).thenReturn(true);
-    when(companyGateway.getCompany(anyLong())).thenReturn(company);
+    when(companyGateway.findCompanyById(anyLong())).thenReturn(company);
     assertEquals(useCase.execute(id).getName(), company.getName());
   }
 }

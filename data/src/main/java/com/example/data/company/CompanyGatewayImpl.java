@@ -30,14 +30,6 @@ public class CompanyGatewayImpl implements CompanyGateway {
 
   @Override
   @Transactional
-  public Company getCompany(Long id){
-
-    final CompanyEntity companyEntity = companyRepository.findById(id).get();
-    return companyEntityMapper.fromEntity(companyEntity, jpaContext);
-  }
-
-  @Override
-  @Transactional
   public Company saveCompany(Company company) {
 
     final CompanyEntity companyEntity = companyEntityMapper.toEntity(company, jpaContext);

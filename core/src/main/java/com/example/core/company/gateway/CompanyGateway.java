@@ -7,8 +7,6 @@ public interface CompanyGateway {
 
   List<Company> findCompanies();
 
-  Company getCompany(Long id);
-
   Company saveCompany(Company company);
 
   void deleteCompanyById(Long id);
