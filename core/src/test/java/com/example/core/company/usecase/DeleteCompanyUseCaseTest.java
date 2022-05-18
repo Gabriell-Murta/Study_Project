@@ -40,17 +40,10 @@ class DeleteCompanyUseCaseTest {
   @Test
   void shouldDeleteCompanyWithSuccess(){
     final Long id = rd.nextLong();
-    final Company company = buildCompany(id);
     when(companyGateway.existsCompany(id)).thenReturn(true);
     useCase.execute(id);
 
     verify(companyGateway, times(1)).deleteCompanyById(id);
   }
 
-  private Company buildCompany(Long id){
-    return Company.builder()
-        .id(id)
-        .name("Test Company")
-        .build();
-  }
 }
