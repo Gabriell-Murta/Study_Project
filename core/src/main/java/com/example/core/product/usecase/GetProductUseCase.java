@@ -17,6 +17,6 @@ public class GetProductUseCase {
     if (!productGateway.existsProduct(id)){
       throw new ProductNotFoundException(id);
     }
-    return productGateway.getProduct(id);
+    return productGateway.findProductById(id);
   }
 }

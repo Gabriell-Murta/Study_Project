@@ -31,14 +31,6 @@ public class ProductGatewayImpl implements ProductGateway {
 
   @Override
   @Transactional
-  public Product getProduct(Long id){
-
-    final ProductEntity productEntity = productRepository.findById(id).get();
-    return productEntityMapper.fromEntity(productEntity, jpaContext);
-  }
-
-  @Override
-  @Transactional
   public Product saveProduct(Product product) {
 
     final ProductEntity productEntity = productEntityMapper.toEntity(product, jpaContext);

@@ -7,8 +7,6 @@ public interface ProductGateway {
 
   List<Product> findProducts();
 
-  Product getProduct(Long id);
-
   Product saveProduct(Product product);
 
   void deleteProductById(Long id);
