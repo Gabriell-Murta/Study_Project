@@ -12,10 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@AllArgsConstructor
 @Data
+@NoArgsConstructor
+@Builder(toBuilder = true)
 @Entity(name = "Product")
 @Table(name = "product")
 public class ProductEntity {
