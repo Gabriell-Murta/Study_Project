@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class CompanyResponse {
-  private final Long id;
-  private final String name;
-  private final List<ProductResponse> products;
+  private Long id;
+  private String name;
+  private List<ProductResponse> products;
 
 }
