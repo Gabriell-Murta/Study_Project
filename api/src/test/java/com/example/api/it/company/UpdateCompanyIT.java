@@ -42,6 +42,6 @@ public class UpdateCompanyIT {
     final String content = result.andReturn().getResponse().getContentAsString();
     final CompanyResponse company = objectMapper.readValue(content, CompanyResponse.class);
 
-    assertNotEquals(company.getName(), "name");
+    assertNotEquals(company.getName(), "Company Name");
   }
 }
