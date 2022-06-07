@@ -4,6 +4,7 @@ import com.example.data.company.entity.CompanyEntity;
 import com.example.data.member.entity.MemberEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,9 @@ public class ProductEntity {
   private String name;
   private String businessSegment;
 
-  @OneToMany(mappedBy = "product")
+  @OneToMany(mappedBy = "product",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true)
   @ToString.Exclude
   private List<MemberEntity> members = new ArrayList<>();
 
