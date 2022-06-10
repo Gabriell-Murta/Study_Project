@@ -3,6 +3,7 @@ import org.flywaydb.gradle.task.FlywayMigrateTask
 plugins {
     id "org.flywaydb.flyway" version "8.5.7"
 }
+
 bootJar {
 	enabled = false
 }
@@ -12,20 +13,26 @@ jar {
 }
 
 flyway {
-    baselineOnMigrate = true
+	baselineOnMigrate = true
 }
 
 task migrateLocal(type: FlywayMigrateTask) {
-    configFiles = [
-            'src/main/resources/flyway-dev.config'
-    ]
+	configFiles = [
+			'src/main/resources/flyway-dev.config'
+	]
+}
+
+task testJar(type: Jar) {
+	classifier = 'test'
+	from sourceSets.test.output
+}
+
+artifacts {
+	testRuntimeOnly testJar
 }
 
 dependencies {
 	implementation project(path: ':core', configuration: 'default')
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation "org.springframework.boot:spring-boot-starter-json"
-	implementation 'org.postgresql:postgresql'
-
 }

@@ -17,7 +17,10 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 
 allprojects {
 	apply plugin: 'java'
@@ -28,6 +31,8 @@ allprojects {
 	apply plugin: 'com.gorylenko.gradle-git-properties'
 	apply plugin: "com.github.ben-manes.versions"
 	apply plugin: 'project-report'
+
+	apply from: "${rootProject.rootDir}/config/tests.gradle"
 
 	repositories {
 		mavenCentral()
@@ -40,38 +45,33 @@ allprojects {
 
 	dependencies {
 		implementation "org.springframework.boot:spring-boot-devtools"
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    	implementation 'org.springframework.boot:spring-boot-starter-validation'
 		implementation 'org.projectlombok:lombok:1.18.22'
 		implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 		implementation "com.fasterxml.jackson.core:jackson-core:2.13.2"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.13.2"
-    implementation "com.fasterxml.jackson.core:jackson-databind:2.13.2"
-    implementation "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.13.2"
+    	implementation "com.fasterxml.jackson.core:jackson-annotations:2.13.2"
+    	implementation "com.fasterxml.jackson.core:jackson-databind:2.13.2"
+    	implementation "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.13.2"
 
 		annotationProcessor 'org.projectlombok:lombok:1.18.22'
 		annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:testcontainers:1.17.2"
-    testImplementation "org.testcontainers:postgresql:1.17.2"
-    testImplementation "org.testcontainers:localstack:1.17.2"
+    	testImplementation "org.springframework.boot:spring-boot-starter-test"
+    	testImplementation "org.testcontainers:testcontainers:1.17.2"
+    	testImplementation "org.testcontainers:postgresql:1.17.2"
 
-    testImplementation "org.flywaydb:flyway-core"
-    testImplementation "org.mockito:mockito-core:3.+"
+    	testImplementation "org.flywaydb:flyway-core"
+    	testImplementation "org.mockito:mockito-core:3.+"
 		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
 		testImplementation "org.mockito:mockito-junit-jupiter:3.+"
-    testImplementation "org.testcontainers:junit-jupiter:1.17.2"
+    	testImplementation "org.testcontainers:junit-jupiter:1.17.2"
 
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 	}
 }
 
 dependencies {
 	implementation project(':core')
-  implementation project(':data')
-  implementation project(':api')
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+  	implementation project(':data')
+  	implementation project(':api')
 }
